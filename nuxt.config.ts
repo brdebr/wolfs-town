@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   imports: {
-    dirs: ['store'],
+    dirs: ['store', 'types'],
   },
   modules: [
     '@nuxtjs/tailwindcss',

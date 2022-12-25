@@ -1,11 +1,6 @@
+import { Player } from "~~/types"
 
-export type Player = {
-  id: number
-  name: string
-  color: string
-}
-
-const usePlayersStore = definePiniaStore('players', () => {
+export const usePlayersStore = definePiniaStore('players', () => {
   const players = ref<Player[]>([])
 
   return {
