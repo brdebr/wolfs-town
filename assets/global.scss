@@ -19,11 +19,7 @@
     @apply ring-[var(--input-color)];
     @apply caret-[var(--input-color)];
     
-    @apply bg-slate-50;
-    @apply dark:bg-slate-900;
-  
-    @apply text-slate-900;
-    @apply dark:text-slate-50;
+    @apply input-bg input-text;
   
     @apply placeholder-gray-500 placeholder-opacity-50;
     @apply focus:placeholder-opacity-25;
@@ -71,6 +67,10 @@
 .input-bg {
   @apply bg-slate-50;
   @apply dark:bg-slate-900;
+}
+.input-text {
+  @apply text-slate-900;
+  @apply dark:text-slate-50;
 }
 
 .nav-button {

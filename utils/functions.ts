@@ -5,3 +5,9 @@ export const getRandomPlayerColor = () => {
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export const omitKeys = (obj: any, keys: string[]) => {
+  const newObj = { ...obj };
+  keys.forEach((key) => delete newObj[key]);
+  return newObj;
+}
