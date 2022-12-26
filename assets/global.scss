@@ -42,8 +42,7 @@
 
       @apply ring-1;
       @apply ring-offset-0;
-      @apply ring-blue-900;
-      @apply dark:ring-red-900;
+      @apply input-ring;
       @apply focus-within:ring-[3px];
 
       &-field {
@@ -80,8 +79,8 @@
       
       @apply ring-2;
       @apply ring-offset-0;
-      @apply ring-blue-800 hover:ring-sky-500;
-      @apply dark:ring-pink-800 dark:hover:ring-rose-500;
+      @apply menu-ring;
+
       @apply rounded-md;
 
       @apply input-bg;
@@ -90,8 +89,7 @@
       &-item {
         @apply input-text;
         &--active {
-          @apply bg-sky-700 text-white;
-          @apply dark:bg-rose-900 dark:text-white;
+          @apply menu-bg-active;
         }
       }
     }
@@ -105,6 +103,19 @@
 .input-text {
   @apply text-slate-900;
   @apply dark:text-slate-50;
+}
+.input-ring {
+  @apply ring-blue-900;
+  @apply dark:ring-red-900;
+}
+
+.menu-ring {
+  @apply ring-blue-800 hover:ring-sky-500;
+  @apply dark:ring-pink-800 dark:hover:ring-rose-500;
+}
+.menu-bg-active {
+  @apply bg-sky-700 text-white;
+  @apply dark:bg-rose-900 dark:text-white;
 }
 
 .nav-button {

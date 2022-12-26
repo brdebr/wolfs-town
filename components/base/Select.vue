@@ -1,6 +1,6 @@
 <template>
   <Combobox v-model="selected" nullable>
-    <div class="relative mt-4 base-select">
+    <div class="relative mt-1 base-select">
       <div
         class="base-select__input"
       >
@@ -45,14 +45,14 @@
       <!-- Input -->
       <TransitionRoot
         v-bind="slideYTransitionCamelCase"
-        @after-leave="query = ''"
+        @after-leave="clearQuery"
       >
         <ComboboxOptions
           class="base-select__menu"
         >
         <!-- Noting found -->
           <div
-            v-if="filteredItems.length === 0 && query !== ''"
+            v-if="query !== '' && filteredItems.length === 0"
             class="relative cursor-default select-none py-2 px-4 text-gray-700"
           >
             Nothing found.
@@ -66,7 +66,7 @@
             v-slot="{ selected, active }"
           >
             <li
-              class="relative cursor-default select-none py-2 pl-10 pr-4"
+              class="relative cursor-default select-none py-2 px-3"
               :class="{
                 'base-select__menu-item--active': active,
                 'base-select__menu-item': !active,
@@ -74,18 +74,11 @@
             >
               <span
                 class="block truncate"
-                :class="{ 'font-medium': selected, 'font-normal': !selected }"
+                :class="{ 'font-bold tracking-wide opacity-40': selected, 'font-normal': !selected }"
               >
                 <slot name="item" :item="item">
                   {{ item[textKey] }}
                 </slot>
-              </span>
-              <span
-                v-if="selected"
-                class="absolute inset-y-0 left-0 flex items-center pl-3"
-                :class="{ 'text-white': active, 'text-teal-600': !active }"
-              >
-                <CheckIcon class="h-5 w-5" aria-hidden="true" />
               </span>
             </li>
           </ComboboxOption>
@@ -125,14 +118,23 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'update:modelValue', value: Role | null): void;
   (event: 'update:query', value: string): void;
+  (event: 'selected', value: Role | null): void;
 }>();
 
 const selected = useVModel(props, 'modelValue', emit);
+watch(selected, (value) => {
+  emit('selected', value)
+})
+
 const query = useVModel(props, 'query', emit);
 
 const clear = () => {
   query.value = ''
   selected.value = null
+}
+
+const clearQuery = () => {
+  query.value = ''
 }
 
 const filteredItems = computed(() => {

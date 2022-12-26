@@ -17,10 +17,20 @@ export const useRolesStore = definePiniaStore('roles', () => {
     roles.value.splice(index, 1);
   }
 
+  const sortByAlignmentAndName = () => {
+    roles.value.sort((a, b) => {
+      if (a.alignment === b.alignment) {
+        return a.name.localeCompare(b.name);
+      }
+      return a.alignment.localeCompare(b.alignment);
+    });
+  };
+
   return {
     roles,
     addRole,
     removeRole,
+    sortByAlignmentAndName,
   };
 
 });

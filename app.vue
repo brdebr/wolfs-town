@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full p-3 back-color">
+  <div class="app-root h-full p-3 back-color">
     <LayoutHeader />
     <div class="page container mx-auto pt-6">
       <NuxtPage />
@@ -13,8 +13,8 @@ onMounted(() => {
 })
 </script>
 <style lang="scss">
-html, body, #__nuxt {
-  height: 100%;
+html, body, #__nuxt, .app-root {
+  min-height: 100vh;
 }
 
 .back-color {

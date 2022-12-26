@@ -16,8 +16,8 @@ export type Player = {
 export type Role = {
   name: string
   emoji: string
+  alignment: string
   description?: string
-  alignment?: string
 }
 
 export type Day = {

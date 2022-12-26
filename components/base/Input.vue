@@ -1,8 +1,8 @@
 <template>
-  <div class="base-input-component" :style="{'--input-color': props.color}">
+  <div class="base-input-component">
     <input
       v-model="value"
-      class="base-input"
+      class="base-input input-ring"
       :title="props.title"
       :placeholder="props.placeholder"
       :type="props.type"
