@@ -1,8 +1,6 @@
 <template>
   <PageCard page-title="Roles">
-    <template #header>
-      Roles
-    </template>
+    <template #header> Roles </template>
     <template #default>
       <div v-for="role in possibleRoles" :key="role.name">
         {{ role }}
