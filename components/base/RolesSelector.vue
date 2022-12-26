@@ -1,8 +1,8 @@
 <template>
   <Combobox v-model="selected" nullable>
-    <div class="relative mt-1">
+    <div class="relative mt-1 group">
       <div
-        class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+        class="relative w-full cursor-default overflow-hidden rounded bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
       >
         <ComboboxButton as='div'>
           <ComboboxInput
@@ -12,20 +12,20 @@
           />
         </ComboboxButton>
         <button
-          class="absolute inset-y-0 right-10 flex items-center pr-2"
+          class="absolute inset-y-0 right-10 flex items-center -mr-2 px-2"
           v-if="selected?.name"
           @click="clear"
         >
           <XCircleIcon
-            class="h-5 w-5 text-gray-400"
+            class="h-5 w-5 text-gray-400 hover:text-gray-600"
             aria-hidden="true"
           />
         </button>
         <ComboboxButton
-          class="absolute inset-y-0 right-0 flex items-center pr-2"
+          class="absolute inset-y-0 right-0 flex items-center pl-1 pr-2"
         >
           <ChevronDownIcon
-            class="h-5 w-5 text-gray-400"
+            class="h-5 w-5 text-gray-400 group-hover:text-gray-600"
             aria-hidden="true"
           />
         </ComboboxButton>
@@ -91,7 +91,8 @@ import {
   ComboboxOption,
   TransitionRoot,
 } from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon, ChevronDownIcon, ChevronUpIcon ,XCircleIcon } from '@heroicons/vue/24/outline'
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
+import { XCircleIcon } from '@heroicons/vue/24/outline'
 
 type Person = {
   id: number

@@ -1,8 +1,6 @@
 <template>
   <div class="h-full p-3 bg-slate-300">
-    <div class="text-center">
-      Wolfs town
-    </div>
+    <LayoutHeader />
     <div class="page container mx-auto pt-6">
       <NuxtPage />
     </div>
