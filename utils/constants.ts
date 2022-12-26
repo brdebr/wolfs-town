@@ -1,20 +1,24 @@
 import { Role } from './types';
 
-export const Roles: Role[] = [
-  { name: 'villager', emoji: '🐑' },
-  { name: 'wolf', emoji: '🐺' },
-  { name: 'seer', emoji: '👁️' },
-  { name: 'witch', emoji: '🧙‍♀️' },
-  { name: 'hunter', emoji: '🏹' },
-  { name: 'cupid', emoji: '💘' },
-  { name: 'lovers', emoji: '❤️' },
-  { name: 'thief', emoji: '🎭️' },
-  { name: 'wild_child', emoji: '🌱' },
-  { name: 'infected_wolf_chief', emoji: '🦠' },
-  { name: 'bear_owner', emoji: '🐻' },
-  { name: 'village_fool', emoji: '🃏' },
-  { name: 'red_lady', emoji: '💋' },
-  { name: 'elder', emoji: '👴' },
+export const appTitle = 'Wolfs Town';
+
+export type Alignment = 'villager' | 'wolf' | 'lover' | 'unknown';
+
+export const possibleRoles: Role[] = [
+  { name: 'villager', emoji: '🐑', alignment: 'villager' },
+  { name: 'wolf', emoji: '🐺', alignment: 'wolf' },
+  { name: 'seer', emoji: '👁️' , alignment: 'villager'},
+  { name: 'witch', emoji: '🧙‍♀️', alignment: 'villager' },
+  { name: 'hunter', emoji: '🏹', alignment: 'villager' },
+  { name: 'cupid', emoji: '💘', alignment: 'villager' },
+  { name: 'lovers', emoji: '❤️', alignment: 'lover' },
+  { name: 'thief', emoji: '🎭️', alignment: 'unknown' },
+  { name: 'wild_child', emoji: '🌱', alignment: 'unknown' },
+  { name: 'infected_wolf_chief', emoji: '🦠', alignment: 'wolf' },
+  { name: 'bear_owner', emoji: '🐻', alignment: 'villager' },
+  { name: 'village_fool', emoji: '🃏', alignment: 'unknown' },
+  { name: 'red_lady', emoji: '💋', alignment: 'villager' },
+  { name: 'elder', emoji: '👴', alignment: 'villager' },
 ];
 
 export const playerColors = [

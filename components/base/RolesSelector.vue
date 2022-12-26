@@ -1,8 +1,22 @@
 <template>
   <Combobox v-model="selected" nullable>
-    <div class="relative mt-1 group">
+    <div class="relative mt-1">
       <div
-        class="relative w-full cursor-default overflow-hidden rounded bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+        class="
+          relative
+          w-full
+          cursor-default
+          overflow-hidden
+          rounded
+          bg-white
+          text-left
+          focus:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-white
+          focus-visible:ring-opacity-75
+          focus-visible:ring-offset-2
+          focus-visible:ring-offset-teal-300
+        "
       >
         <ComboboxButton as='div'>
           <ComboboxInput
@@ -23,21 +37,43 @@
         </button>
         <ComboboxButton
           class="absolute inset-y-0 right-0 flex items-center pl-1 pr-2"
+          v-slot="{ open }"
         >
-          <ChevronDownIcon
-            class="h-5 w-5 text-gray-400 group-hover:text-gray-600"
-            aria-hidden="true"
-          />
+          <transition v-bind="(fadeTransition as TransitionProps)">
+            <ChevronDownIcon
+              v-if="!open"
+              class="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+            <ChevronUpIcon
+              v-else
+              class="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+          </transition>
         </ComboboxButton>
       </div>
       <TransitionRoot
-        leave="transition ease-in duration-100"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+        v-bind="slideYTransitionCamelCase"
         @after-leave="query = ''"
       >
         <ComboboxOptions
-          class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          class="
+            absolute
+            mt-1
+            max-h-60
+            w-full
+            overflow-auto
+            rounded-md
+            bg-white
+            py-1
+            text-base
+            shadow-lg
+            ring-1
+            ring-black
+            ring-opacity-5
+            focus:outline-none
+          "
         >
           <div
             v-if="filteredPeople.length === 0 && query !== ''"
@@ -82,7 +118,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { TransitionProps } from 'vue'
 import {
   Combobox,
   ComboboxInput,

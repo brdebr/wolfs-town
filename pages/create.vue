@@ -1,16 +1,23 @@
 <template>
-  <div class="flex flex-col gap-3 border rounded-lg p-4">
-    <div class="text-center">Create game</div>
-    <hr>
-    <div class="grid grid-cols-2">
+  <PageCard page-title="Create game">
+    <template #header>
+      <div class="text-center">
+        Create game
+      </div>
+    </template>
+    <template #default>
+      <div class="grid grid-cols-2">
       <div class="players">
         <div class="players__header text-center font-bold underline">Players</div>
         <div class="players__list text-center">
-          <div v-for="player in players" :key="player.id">
-            {{ player.name }}
+          <div class="flex items-center gap-3" v-for="player in players" :key="player.id">
+            <BasePlayerInput :player="player" />
+            <button title="Remove player" class="border border-red-300 hover:border-red-600 bg-white hover:bg-red-50 rounded p-1 group" @click="playersStore.removePlayer(player)">
+              <XMarkIcon class="h-5 w-5 text-red-400 group-hover:text-red-600" />
+            </button>
           </div>
-          <form class="mt-2" @submit.prevent="addPlayer">
-            <input class="px-3 py-1 rounded" v-model="newPlayerName" type="text">
+          <form @submit.prevent="addPlayer">
+            <BasePlayerInput :player="newPlayer" />
           </form>
         </div>
       </div>
@@ -28,27 +35,23 @@
         </div>
       </div>
     </div>
-  </div>
+    </template>
+  </PageCard>
 </template>
 
 <script setup lang="ts">
+import XMarkIcon from '@heroicons/vue/24/outline/XMarkIcon';
+import { Player } from '~~/utils/types';
+
 const playersStore = usePlayersStore();
 const { players } = storeToRefs(playersStore);
-
-const newPlayerName = ref('');
-const newPlayerColor = ref('');
-
-const resetNewPlayer = () => {
-  newPlayerName.value = '';
-  newPlayerColor.value = '';
-};
+const newPlayer = ref<Player>({ id: 0, name: '', color: playersStore.getExcludingRandomColor() });
 
 const addPlayer = () => {
-  players.value.push({
-    id: Date.now(),
-    name: newPlayerName.value,
-    color: newPlayerColor.value,
-  });
-  resetNewPlayer();
+  if (newPlayer.value.name === '') return;
+
+  playersStore.addPlayer(newPlayer.value);
+  playersStore.sortPlayersByName();
+  newPlayer.value = { id: 0, name: '', color: playersStore.getExcludingRandomColor() };
 };
 </script>

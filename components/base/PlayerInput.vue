@@ -1,5 +1,5 @@
 <template>
-  <div class="player-input group/player flex gap-2" :style="styleBind">
+  <div class="player-input group/player mt-1 flex gap-2" :style="styleBind">
     <input
       v-model="player.name"
       title="Player name"

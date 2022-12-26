@@ -3,36 +3,74 @@
 @tailwind utilities;
 
 @layer components {
-  .base-input{
-    @apply h-7;
-    @apply px-2;
+  .base-input {
+    @apply px-2 py-2 leading-5;
     &[type="color"]{
-      @apply px-1;
+      @apply px-1 py-0;
+      @apply h-9;
     }
-
+  
     @apply rounded;
     @apply outline-none;
     @apply transition-shadow;
     @apply ring-1 ring-offset-0;
     @apply focus:ring-2;
-
+  
     @apply ring-[var(--input-color)];
     @apply caret-[var(--input-color)];
     
     @apply bg-slate-50;
     @apply dark:bg-slate-900;
-
+  
     @apply text-slate-900;
     @apply dark:text-slate-50;
-
+  
     @apply placeholder-gray-500 placeholder-opacity-50;
     @apply focus:placeholder-opacity-25;
-
+  
     @apply dark:placeholder-gray-500 dark:placeholder-opacity-75;
     @apply dark:focus:placeholder-opacity-30;
-
+  
     @apply placeholder-shown:select-none;
   }
+  .base-select {
+    &__input {
+      @apply relative;
+      @apply w-full;
+      @apply cursor-default;
+      @apply overflow-hidden;
+      @apply rounded;
+      @apply text-left;
+      @apply focus:outline-none;
+      @apply focus-visible:ring-2;
+      @apply focus-visible:ring-white;
+      @apply focus-visible:ring-opacity-75;
+      @apply focus-visible:ring-offset-2;
+      @apply focus-visible:ring-offset-teal-300;
+      &-field {
+        @apply w-full;
+        @apply border-none;
+        @apply py-2;
+        @apply pl-3 pr-10;
+        @apply text-sm;
+        @apply leading-5;
+        @apply text-gray-900;
+        @apply focus:ring-0;
+        @apply focus:outline-none;
+      }
+      &-icon {
+        @apply h-5 w-5 text-gray-400;
+      }
+    }
+    &__menu {
+
+    }
+  }
+}
+
+.input-bg {
+  @apply bg-slate-50;
+  @apply dark:bg-slate-900;
 }
 
 .nav-button {
