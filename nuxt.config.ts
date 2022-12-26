@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['store', 'types'],
   },
+  css: ['@/assets/global.scss'],
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-headlessui',

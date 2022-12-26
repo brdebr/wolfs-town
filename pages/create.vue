@@ -17,9 +17,12 @@
       <div class="roles">
         <div class="roles">
           <div class="roles__header text-center font-bold underline">Roles</div>
-          <div class="roles__list text-center">
-            <div v-for="player in players" :key="player.id">
+          <div class="roles__list">
+            <div v-for="player in players" :key="player.id" class="text-center">
               {{ player.name }}
+            </div>
+            <div>
+              <BaseRolesSelector />
             </div>
           </div>
         </div>
