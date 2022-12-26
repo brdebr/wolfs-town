@@ -1,13 +1,26 @@
 <template>
-  <div class="player-input flex gap-2" :style="styleBind">
+  <div class="player-input group/player flex gap-2" :style="styleBind">
     <input
+      v-model="player.name"
       title="Player name"
-      class="input rounded-r-none"
+      class="
+        base-input
+        rounded-r-none
+        group-focus-within/player:ring-4
+      "
       placeholder="Player name"
       type="text"
-      v-model="player.name"
     />
-    <input title="Player color" class="input rounded-l-none" type="color" v-model="player.color" />
+    <input
+      v-model="player.color"
+      title="Player color"
+      class="
+        base-input
+        rounded-l-none
+        group-focus-within/player:ring-4
+      "
+      type="color"
+    />
   </div>
 </template>
 

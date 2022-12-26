@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  .input{
+  .base-input{
     @apply h-7;
     @apply px-2;
     &[type="color"]{
@@ -13,20 +13,52 @@
     @apply rounded;
     @apply outline-none;
     @apply transition-shadow;
-    @apply bg-slate-50;
-    @apply dark:bg-slate-900;
-    @apply ring-1;
+    @apply ring-1 ring-offset-0;
     @apply focus:ring-2;
 
     @apply ring-[var(--input-color)];
     @apply caret-[var(--input-color)];
     
+    @apply bg-slate-50;
+    @apply dark:bg-slate-900;
+
+    @apply text-slate-900;
+    @apply dark:text-slate-50;
+
     @apply placeholder-gray-500 placeholder-opacity-50;
-    @apply focus:placeholder-opacity-30;
+    @apply focus:placeholder-opacity-25;
 
     @apply dark:placeholder-gray-500 dark:placeholder-opacity-75;
     @apply dark:focus:placeholder-opacity-30;
 
     @apply placeholder-shown:select-none;
   }
-} 
+}
+
+.nav-button {
+  @apply w-full;
+  @apply inline-flex justify-center;
+  @apply px-2 py-1;
+  @apply rounded-md;
+  @apply text-sm font-medium;
+  @apply hover:ring-1;
+  @apply focus:outline-none;
+  @apply focus-visible:ring-2 focus-visible:ring-offset-1;
+}
+
+.nav-button-bg {
+  @apply bg-sky-700 bg-opacity-80 hover:bg-opacity-100;
+  @apply dark:bg-black dark:bg-opacity-20 dark:hover:bg-opacity-50;
+}
+.nav-button-text {
+  @apply text-white;
+  @apply dark:text-gray-200;
+
+  @apply hover:ring-slate-500;
+  @apply dark:hover:ring-slate-300;
+
+  @apply focus-visible:ring-blue-800;
+  @apply dark:focus-visible:ring-white;
+
+  @apply focus-visible:ring-opacity-75;
+}

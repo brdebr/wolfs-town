@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full p-3 bg-slate-300">
+  <div class="h-full p-3 back-color">
     <LayoutHeader />
     <div class="page container mx-auto pt-6">
       <NuxtPage />
@@ -7,18 +7,18 @@
   </div>
 </template>
 <script setup lang="ts">
-const isDarkMode = useDark({
-  selector: 'html',
-  attribute: 'class',
-  valueDark: 'dark',
-  valueLight: 'light',
-})
+const { isDarkRef } = useDarkMode();
 onMounted(() => {
-  document?.querySelector('html')?.classList.add('dark')
+  isDarkRef.value = true;
 })
 </script>
 <style lang="scss">
 html, body, #__nuxt {
   height: 100%;
+}
+
+.back-color {
+  @apply bg-sky-50;
+  @apply dark:bg-rose-900;
 }
 </style>
