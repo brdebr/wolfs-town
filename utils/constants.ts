@@ -5,20 +5,90 @@ export const appTitle = 'Wolfs Town';
 export type Alignment = 'villager' | 'wolf' | 'lover' | 'unknown';
 
 export const possibleRoles: Role[] = [
-  { name: 'villager', emoji: '🐑', alignment: 'villager' },
-  { name: 'wolf', emoji: '🐺', alignment: 'wolf' },
-  { name: 'seer', emoji: '👁️' , alignment: 'villager'},
-  { name: 'witch', emoji: '🧙‍♀️', alignment: 'villager' },
-  { name: 'hunter', emoji: '🏹', alignment: 'villager' },
-  { name: 'cupid', emoji: '💘', alignment: 'villager' },
-  { name: 'lovers', emoji: '❤️', alignment: 'lover' },
-  { name: 'thief', emoji: '🎭️', alignment: 'unknown' },
-  { name: 'wild_child', emoji: '🌱', alignment: 'unknown' },
-  { name: 'infected_wolf_chief', emoji: '🦠', alignment: 'wolf' },
-  { name: 'bear_owner', emoji: '🐻', alignment: 'villager' },
-  { name: 'village_fool', emoji: '🃏', alignment: 'unknown' },
-  { name: 'red_lady', emoji: '💋', alignment: 'villager' },
-  { name: 'elder', emoji: '👴', alignment: 'villager' },
+  {
+    name: 'villager',
+    emoji: '🐑',
+    alignment: 'villager',
+    displayName: 'Villager',
+  },
+  {
+    name: 'wolf',
+    emoji: '🐺',
+    alignment: 'wolf',
+    displayName: 'Wolf',
+  },
+  {
+    name: 'seer',
+    emoji: '🔮',
+    alignment: 'villager',
+    displayName: 'Seer',
+  },
+  {
+    name: 'witch',
+    emoji: '🧙‍♀️',
+    alignment: 'villager',
+    displayName: 'Witch',
+  },
+  {
+    name: 'hunter',
+    emoji: '🏹',
+    alignment: 'villager',
+    displayName: 'Hunter',
+  },
+  {
+    name: 'cupid',
+    emoji: '💘',
+    alignment: 'villager',
+    displayName: 'Cupid',
+  },
+  {
+    name: 'lovers',
+    emoji: '❤️',
+    alignment: 'lover',
+    displayName: 'Lovers',
+  },
+  {
+    name: 'thief',
+    emoji: '🎭️',
+    alignment: 'unknown',
+    displayName: 'Thief',
+  },
+  {
+    name: 'wild_child',
+    emoji: '😼',
+    alignment: 'unknown',
+    displayName: 'Wild Child',
+  },
+  {
+    name: 'infected_wolf_chief',
+    emoji: '🦠',
+    alignment: 'wolf',
+    displayName: 'Infected Wolf Chief',
+  },
+  {
+    name: 'bear_owner',
+    emoji: '🐻',
+    alignment: 'villager',
+    displayName: 'Bear Owner',
+  },
+  {
+    name: 'village_fool',
+    emoji: '🃏',
+    alignment: 'unknown',
+    displayName: 'Village Fool',
+  },
+  {
+    name: 'red_lady',
+    emoji: '💋',
+    alignment: 'villager',
+    displayName: 'Red Lady',
+  },
+  {
+    name: 'elder',
+    emoji: '👴',
+    alignment: 'villager',
+    displayName: 'Elder',
+  },
 ];
 
 export const playerColors = [

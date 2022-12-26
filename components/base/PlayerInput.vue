@@ -1,10 +1,11 @@
 <template>
-  <div class="player-input group/player mt-1 flex gap-2" :style="styleBind">
+  <div class="player-input group/player mt-1 w-full flex gap-2" :style="styleBind">
     <input
       v-model="player.name"
       title="Player name"
       class="
         base-input
+        w-full
         rounded-r-none
         group-focus-within/player:ring-4
       "

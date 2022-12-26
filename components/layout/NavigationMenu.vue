@@ -22,7 +22,7 @@
             <NuxtLink
               :class="[
                 active ? 'nav-item-bg nav-item-text--active' : 'nav-item-text',
-                'flex w-full items-center rounded-md px-2 py-2 text-sm',
+                'flex w-full items-center rounded-md px-2 py-2 text-sm transition-colors duration-200',
               ]"
               :to="route.path"
               @click="close"
@@ -70,8 +70,8 @@ const routeItems = [
   }
 }
 .nav-item-bg {
-  @apply bg-sky-700;
-  @apply dark:bg-red-900;
+  @apply bg-sky-800;
+  @apply dark:bg-pink-900;
 }
 .nav-menu-bg {
   @apply bg-sky-600;

@@ -17,6 +17,7 @@ export type Role = {
   name: string
   emoji: string
   alignment: string
+  displayName?: string
   description?: string
 }
 

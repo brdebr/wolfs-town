@@ -14,7 +14,7 @@
     @apply outline-none;
     @apply transition-shadow;
     @apply ring-1 ring-offset-0;
-    @apply focus:ring-2;
+    @apply focus-within:ring-[3px];
   
     @apply ring-[var(--input-color)];
     @apply caret-[var(--input-color)];
@@ -42,8 +42,10 @@
 
       @apply ring-1;
       @apply ring-offset-0;
-      @apply input-ring;
+      @apply transition-shadow;
       @apply focus-within:ring-[3px];
+
+      @apply input-ring;
 
       &-field {
         @apply w-full;
@@ -111,7 +113,8 @@
 
 .menu-ring {
   @apply ring-blue-800 hover:ring-sky-500;
-  @apply dark:ring-pink-800 dark:hover:ring-rose-500;
+  @apply dark:ring-pink-800 dark:hover:ring-rose-700;
+  @apply transition-shadow;
 }
 .menu-bg-active {
   @apply bg-sky-700 text-white;

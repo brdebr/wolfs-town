@@ -4,7 +4,7 @@
       <div class="text-center">Create game</div>
     </template>
     <template #default>
-      <div class="flex end">
+      <div class="flex max-lg:flex-col end">
         <div class="flex flex-col gap-1 mb-4 flex-grow">
           <div class="text-sm">Name:</div>
           <div>
@@ -18,14 +18,19 @@
         <div class="flex flex-col gap-1 mb-4">
           <div class="text-sm">Date:</div>
           <div class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4">
-            {{ date?.toISOString()?.replace('T', ' ').replace('Z', '').slice(0, 19) }}
+            {{ createdAt?.toISOString()?.replace('T', ' ').replace('Z', '').slice(0, 19) }}
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid max-lg:grid-cols-1 grid-cols-2 gap-4">
         <div class="players">
-          <div class="players__header text-center font-bold underline mb-3">
-            Players
+          <div class="players__header text-center font-bold mb-3">
+            <span class="underline mr-3">
+              Players
+            </span>
+            <span v-if="players.length">
+              [ {{ players.length }} ]
+            </span>
           </div>
           <div class="players__list flex flex-col gap-3">
             <div
@@ -51,8 +56,13 @@
         </div>
         <div class="roles">
           <div class="roles">
-            <div class="roles__header text-center font-bold underline mb-3">
-              Roles
+            <div class="roles__header text-center font-bold mb-3">
+              <span class="underline mr-3">
+                Roles
+              </span>
+              <span v-if="roles.length">
+                [ {{ roles.length }} ]
+              </span>
             </div>
             <div class="roles__list flex flex-col gap-3">
               <div v-for="rol in roles" :key="rol.id" class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4 mt-1">
@@ -60,7 +70,7 @@
                   {{ rol.emoji }}
                 </span>
                 <span>
-                  {{ capitalize(rol.name) }}
+                  {{ rol.displayName }}
                 </span>
               </div>
               <form @submit.prevent="false">
@@ -76,7 +86,12 @@
                   :exclude-search-keys="['alignment']"
                 >
                   <template #item="{ item }">
-                    {{ item.emoji }} - {{ capitalize(`${item.name}`) }}
+                    <span class="mr-4">
+                      {{ item.emoji }}
+                    </span>
+                    <span>
+                      {{ item.displayName }}
+                    </span>
                   </template>
                 </BaseSelect>
               </form>
@@ -96,10 +111,14 @@ import { Player, Role } from '~~/utils/types';
 const gameStore = useGameStore();
 const {
   name,
-  date,
+  createdAt,
+  endedAt,
   players: gamePlayers,
   roles: gameRoles,
 } = storeToRefs(gameStore);
+useIntervalFn(() => {
+  createdAt.value = new Date();
+}, 1000);
 
 // Players
 const playersStore = usePlayersStore();
@@ -130,7 +149,7 @@ const displayFn = (role: unknown) => {
   if (!roleObj) {
     return '';
   }
-  return `${roleObj.emoji} - ${capitalize(roleObj.name)}`;
+  return `${roleObj.emoji} - ${roleObj.displayName || ''}`;
 };
 
 const selected = ref<Role | null>(null);

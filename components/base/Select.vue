@@ -66,7 +66,7 @@
             v-slot="{ selected, active }"
           >
             <li
-              class="relative cursor-default select-none py-2 px-3"
+              class="relative cursor-pointer select-none py-2 px-3 transition-colors duration-100"
               :class="{
                 'base-select__menu-item--active': active,
                 'base-select__menu-item': !active,
