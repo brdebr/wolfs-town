@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-8">
+  <div class="relative h-8 z-10">
     <div class="absolute w-full flex items-center">
       <div class="mx-auto">
         Wolfs town

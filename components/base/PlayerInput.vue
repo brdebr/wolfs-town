@@ -1,18 +1,26 @@
 <template>
-  <div class="player-input flex gap-2">
-    <input class="input rounded-r-none" placeholder="Player name" type="text" v-model="name">
-    <input class="input rounded-l-none" type="color" v-model="color">
+  <div class="player-input flex gap-2" :style="styleBind">
+    <input
+      class="input rounded-r-none"
+      placeholder="Player name"
+      type="text"
+      v-model="player.name"
+    />
+    <input class="input rounded-l-none" type="color" v-model="player.color" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { Player } from '~~/utils/types';
+const props = defineProps<{
+  player: Player;
+}>();
+const emit = defineEmits<{
+  (event: 'update:player', player: Player): void;
+}>();
 
-const name = ref('');
-const color = ref(getRandomPlayerColor());
-
+const player = useVModel(props, 'player', emit);
+const styleBind = computed(() => ({
+  '--input-color': player.value.color || '#000',
+}));
 </script>
-<style scoped>
-.player-input {
-  --input-color: v-bind(color);
-}
-</style>

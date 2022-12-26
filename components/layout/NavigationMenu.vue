@@ -14,70 +14,27 @@
 
       <transition
         enter-active-class="transition duration-100 ease-out"
-        enter-from-class="transform scale-95 opacity-0"
-        enter-to-class="transform scale-100 opacity-100"
+        enter-from-class="transform opacity-0"
+        enter-to-class="transform opacity-100"
         leave-active-class="transition duration-75 ease-in"
-        leave-from-class="transform scale-100 opacity-100"
-        leave-to-class="transform scale-95 opacity-0"
+        leave-from-class="transform opacity-100"
+        leave-to-class="transform opacity-0"
       >
         <MenuItems
           class="absolute right-0 mt-1 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
         >
-          <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
-              <button
+          <div v-for="route in routeItems" :key="route.path" class="px-1 py-1">
+            <MenuItem v-slot="{ active, close }">
+              <NuxtLink
                 :class="[
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
+                :to="route.path"
+                @click="close"
               >
-                Edit
-              </button>
-            </MenuItem>
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
-              >
-                Duplicate
-              </button>
-            </MenuItem>
-          </div>
-          <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
-              >
-                Archive
-              </button>
-            </MenuItem>
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
-              >
-                Move
-              </button>
-            </MenuItem>
-          </div>
-
-          <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
-              <button
-                :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
-              >
-                Delete
-              </button>
+                {{ route.name }}
+              </NuxtLink>
             </MenuItem>
           </div>
         </MenuItems>
@@ -97,6 +54,50 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
-const router = useRouter();
-const routes = router.options.routes;
+// const router = useRouter();
+// const routes = router.options.routes;
+
+// const capitalize = (str: string) => {
+//   return str.charAt(0).toUpperCase() + str.slice(1);
+// };
+
+const routeItems = [
+  {
+    path: '/',
+    name: 'Home',
+  },
+  {
+    path: '/create',
+    name: 'Create',
+  },
+  {
+    path: '/players',
+    name: 'Players',
+  },
+  {
+    path: '/roles',
+    name: 'Roles',
+  },
+  // {
+  //   path: '/days',
+  //   name: 'Days',
+  // },
+  // {
+  //   path: '/games',
+  //   name: 'Games',
+  // },
+]
+
+// const routeItems = computed(() => {
+//   return routes.map(({ name: routeName, path }) => {
+//     const nameCap = capitalize(routeName?.toString() || '');
+//     const name = nameCap === 'Index' ? 'Home' : nameCap;
+//     return {
+//       name,
+//       path,
+//     };
+//   })
+//   // sort like : Home, Create, Players, Roles, Days ,Games
+//   .sort
+// });
 </script>
