@@ -1,12 +1,13 @@
 <template>
   <div class="player-input flex gap-2" :style="styleBind">
     <input
+      title="Player name"
       class="input rounded-r-none"
       placeholder="Player name"
       type="text"
       v-model="player.name"
     />
-    <input class="input rounded-l-none" type="color" v-model="player.color" />
+    <input title="Player color" class="input rounded-l-none" type="color" v-model="player.color" />
   </div>
 </template>
 
