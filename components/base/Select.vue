@@ -1,40 +1,29 @@
 <template>
   <Combobox v-model="selected" nullable>
-    <div class="relative mt-4">
+    <div class="relative mt-4 base-select">
       <div
-        class="
-          relative
-          w-full
-          cursor-default
-          overflow-hidden
-          rounded
-          bg-white
-          text-left
-          focus:outline-none
-          focus-visible:ring-2
-          focus-visible:ring-white
-          focus-visible:ring-opacity-75
-          focus-visible:ring-offset-2
-          focus-visible:ring-offset-teal-300
-        "
+        class="base-select__input"
       >
+        <!-- Input -->
         <ComboboxButton as='div'>
           <ComboboxInput
-            class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 focus:outline-none"
+            class="base-select__input-field"
             :displayValue="displayValueFn"
             @change="query = $event.target.value"
           />
         </ComboboxButton>
+        <!-- Clear button -->
         <button
           class="absolute inset-y-0 right-10 flex items-center -mr-2 px-2"
           v-if="selected"
           @click="clear"
         >
           <XCircleIcon
-            class="h-5 w-5 text-gray-400 hover:text-gray-600"
+            class="base-select__input-icon"
             aria-hidden="true"
           />
         </button>
+        <!-- Open select button -->
         <ComboboxButton
           class="absolute inset-y-0 right-0 flex items-center pl-1 pr-2"
           v-slot="{ open }"
@@ -42,39 +31,26 @@
           <transition v-bind="(fadeTransition as TransitionProps)">
             <ChevronDownIcon
               v-if="!open"
-              class="h-5 w-5 text-gray-400"
+              class="base-select__input-icon"
               aria-hidden="true"
             />
             <ChevronUpIcon
               v-else
-              class="h-5 w-5 text-gray-400"
+              class="base-select__input-icon"
               aria-hidden="true"
             />
           </transition>
         </ComboboxButton>
       </div>
+      <!-- Input -->
       <TransitionRoot
         v-bind="slideYTransitionCamelCase"
         @after-leave="query = ''"
       >
         <ComboboxOptions
-          class="
-            absolute
-            mt-1
-            max-h-60
-            w-full
-            overflow-auto
-            rounded-md
-            bg-white
-            py-1
-            text-base
-            shadow-lg
-            ring-1
-            ring-black
-            ring-opacity-5
-            focus:outline-none
-          "
+          class="base-select__menu"
         >
+        <!-- Noting found -->
           <div
             v-if="filteredItems.length === 0 && query !== ''"
             class="relative cursor-default select-none py-2 px-4 text-gray-700"
@@ -85,15 +61,15 @@
           <ComboboxOption
             v-for="item in filteredItems"
             as="template"
-            :key="item.id"
-            :value="item[valueKey]"
+            :key="item[keyProp]"
+            :value="item"
             v-slot="{ selected, active }"
           >
             <li
               class="relative cursor-default select-none py-2 pl-10 pr-4"
               :class="{
-                'bg-teal-600 text-white': active,
-                'text-gray-900': !active,
+                'base-select__menu-item--active': active,
+                'base-select__menu-item': !active,
               }"
             >
               <span
@@ -131,6 +107,7 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
 import { XCircleIcon } from '@heroicons/vue/24/outline'
+import { Role } from '~~/utils/types'
 
 export type SelectItem = Record<string, string | number>
 
@@ -139,13 +116,14 @@ const props = defineProps<{
   displayValueFn: (item: unknown) => string,
   valueKey: string,
   textKey: string,
-  modelValue: string | number | null,
+  keyProp: string,
+  modelValue: Role | null,
   query: string,
   excludeSearchKeys?: string[],
 }>();
 
 const emit = defineEmits<{
-  (event: 'update:modelValue', value: string | number | null): void;
+  (event: 'update:modelValue', value: Role | null): void;
   (event: 'update:query', value: string): void;
 }>();
 

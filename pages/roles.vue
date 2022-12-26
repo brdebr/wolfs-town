@@ -7,6 +7,7 @@
         :displayValueFn="displayFn"
         valueKey="name"
         textKey="name"
+        key-prop="name"
         v-model="selected"
         v-model:query="query"
         :exclude-search-keys="['alignment']"
@@ -25,9 +26,13 @@ import { Role } from '~~/utils/types';
 const rolesStore = useRolesStore();
 const { roles } = storeToRefs(rolesStore);
 const displayFn = (role: unknown) => {
-  return role as string;
+  const roleObj = role as Role;
+  if (!roleObj) {
+    return '';
+  }
+  return `${roleObj.emoji} - ${capitalize(roleObj.name)}`;
 };
 
-const selected = ref<string>('');
+const selected = ref<Role | null>(null);
 const query = ref('');
 </script>
