@@ -6,6 +6,17 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+const isDarkMode = useDark({
+  selector: 'html',
+  attribute: 'class',
+  valueDark: 'dark',
+  valueLight: 'light',
+})
+onMounted(() => {
+  document?.querySelector('html')?.classList.add('dark')
+})
+</script>
 <style lang="scss">
 html, body, #__nuxt {
   height: 100%;

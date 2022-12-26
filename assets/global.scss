@@ -20,22 +20,11 @@
 
     @apply ring-[var(--input-color)];
     @apply caret-[var(--input-color)];
-
-    // @apply ring-indigo-300;
-    // @apply caret-indigo-300;
-
-    // @apply dark:ring-blue-800;
-    // @apply dark:caret-blue-800;
-
-    // &--invalid{
-    //   @apply ring-red-500;
-    //   @apply dark:ring-red-400;
-    // }
     
     @apply placeholder-gray-500 placeholder-opacity-50;
     @apply focus:placeholder-opacity-30;
 
-    @apply dark:placeholder-gray-700 dark:placeholder-opacity-75;
+    @apply dark:placeholder-gray-500 dark:placeholder-opacity-75;
     @apply dark:focus:placeholder-opacity-30;
 
     @apply placeholder-shown:select-none;

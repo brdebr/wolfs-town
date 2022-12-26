@@ -18,5 +18,8 @@ export default defineNuxtConfig({
       },
     ],
   ],
+  tailwindcss: {
+    configPath: './tailwind.js'
+  },
   ssr: false,
 });
