@@ -16,7 +16,7 @@ export const usePlayersStore = definePiniaStore('players', () => {
   const addPlayer = (newPlayer: Player) => {
     if (!newPlayer.name) return;
 
-    newPlayer.id = Date.now();
+    newPlayer.id = newId();
     newPlayer.name = capitalize(newPlayer.name.trim());
     players.value.push(newPlayer);
   }

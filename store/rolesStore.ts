@@ -1,5 +1,5 @@
 import { Role } from "~~/utils/types"
-export type RoleItem = Role & { id: number };
+export type RoleItem = Role & { id: string };
 
 export const useRolesStore = definePiniaStore('roles', () => {
   const roles = ref<RoleItem[]>([]);
@@ -7,7 +7,7 @@ export const useRolesStore = definePiniaStore('roles', () => {
   const addRole = (role: Role) => {
     const roleItem = {
       ...role,
-      id: Date.now(),
+      id: newId(),
     };
     roles.value.push(roleItem);
   }

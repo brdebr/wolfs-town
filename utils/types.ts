@@ -1,5 +1,5 @@
 export type Game = {
-  id: number
+  id: string
   name: string
   createdAt: Date
   startedAt?: Date
@@ -11,7 +11,7 @@ export type Game = {
 }
 
 export type Player = {
-  id: number
+  id: string
   name: string
   color: string
 }
@@ -33,7 +33,7 @@ export type Day = {
 }
 
 export type DayData = {
-  player: number,
+  player: string,
   suspects: number[],
   defends: number[],
   roleGuesses: string[],

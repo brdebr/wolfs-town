@@ -14,7 +14,7 @@ export const useGameStore = definePiniaStore('game', () => {
 
   const createGame = () => {
     const gameObj: Game = {
-      id: Date.now(),
+      id: newId(),
       name: name.value,
       createdAt: createdAt.value,
       endedAt: endedAt.value,
