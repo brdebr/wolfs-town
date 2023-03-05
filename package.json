@@ -8,18 +8,18 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.2.0",
+    "@nuxtjs/tailwindcss": "^6.4.1",
     "@vueuse/core": "^9.9.0",
     "@vueuse/nuxt": "^9.9.0",
-    "nuxt": "3.0.0",
-    "nuxt-headlessui": "^1.0.4",
+    "nuxt": "^3.2.3",
+    "nuxt-headlessui": "^1.1.1",
     "sass": "^1.57.1"
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.13",
-    "@pinia/nuxt": "^0.4.6",
+    "@pinia/nuxt": "^0.4.7",
     "@types/uuid": "^9.0.1",
-    "pinia": "^2.0.28",
+    "pinia": "^2.0.32",
     "uuid": "^9.0.0"
   }
 }

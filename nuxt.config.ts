@@ -9,6 +9,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  devServer: {
+    port: 3030,
+  },
   imports: {
     dirs: ['store', 'types'],
   },
