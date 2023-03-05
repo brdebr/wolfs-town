@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     port: 3030,
   },
   imports: {
-    dirs: ['store', 'types'],
+    dirs: ['store'],
   },
   css: ['@/assets/global.scss'],
   modules: [
