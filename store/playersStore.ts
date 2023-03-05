@@ -1,6 +1,3 @@
-import { capitalize } from "~~/utils/functions"
-import { Player } from "~~/utils/types"
-
 export const usePlayersStore = definePiniaStore('players', () => {
   const players = ref<Player[]>([])
 

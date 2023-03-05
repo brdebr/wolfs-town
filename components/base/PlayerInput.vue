@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import { Player } from '~~/utils/types';
 const props = defineProps<{
   player: Player;
 }>();

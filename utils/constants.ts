@@ -1,5 +1,3 @@
-import { Role } from './types';
-
 export const appTitle = 'Wolfs Town';
 
 export type Alignment = 'villager' | 'wolf' | 'lover' | 'unknown';

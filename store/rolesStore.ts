@@ -1,6 +1,3 @@
-import { Role } from "~~/utils/types"
-export type RoleItem = Role & { id: string };
-
 export const useRolesStore = definePiniaStore('roles', () => {
   const roles = ref<RoleItem[]>([]);
 

@@ -1,4 +1,4 @@
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export const getRandomPlayerColor = () => {
   return playerColors[Math.floor(Math.random() * playerColors.length)];
@@ -14,6 +14,6 @@ export const omitKeys = (obj: any, keys: string[]) => {
   return newObj;
 }
 
-export const newId = () => {
+export const newId = () : UUID => {
   return uuid();
 }

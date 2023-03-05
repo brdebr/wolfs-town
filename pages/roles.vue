@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { Role } from '~~/utils/types';
 
 const rolesStore = useRolesStore();
 const { roles } = storeToRefs(rolesStore);

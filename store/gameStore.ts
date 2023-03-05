@@ -1,6 +1,3 @@
-import { Day, Game, Player } from "~~/utils/types"
-import { RoleItem } from "./rolesStore"
-
 export const useGameStore = definePiniaStore('game', () => {
   const name = ref('')
   const createdAt = ref(new Date())

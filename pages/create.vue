@@ -114,7 +114,6 @@
 
 <script setup lang="ts">
 import XMarkIcon from '@heroicons/vue/24/outline/XMarkIcon';
-import { Player, Role } from '~~/utils/types';
 
 // Game
 const gameStore = useGameStore();
@@ -130,7 +129,7 @@ const { isActive, pause } = useIntervalFn(() => {
 const playersStore = usePlayersStore();
 const { players } = storeToRefs(playersStore);
 const newPlayer = ref<Player>({
-  id: 0,
+  id: '',
   name: '',
   color: playersStore.getExcludingRandomColor(),
 });
@@ -139,7 +138,7 @@ const addPlayer = () => {
   playersStore.addPlayer(newPlayer.value);
   playersStore.sortPlayersByName();
   newPlayer.value = {
-    id: 0,
+    id: '',
     name: '',
     color: playersStore.getExcludingRandomColor(),
   };

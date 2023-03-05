@@ -100,7 +100,6 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
 import { XCircleIcon } from '@heroicons/vue/24/outline'
-import { Role } from '~~/utils/types'
 
 export type SelectItem = Record<string, string | number>
 
