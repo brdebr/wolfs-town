@@ -19,16 +19,17 @@
       >
         <div v-for="route in routeItems" :key="route.path" class="px-1 py-1">
           <MenuItem v-slot="{ active, close }">
-            <NuxtLink
-              :class="[
+            <a href="javascript:void(0)" @click="navigate(route.path, close)" :class="[
                 active ? 'nav-item-bg nav-item-text--active' : 'nav-item-text',
                 'flex w-full items-center rounded-md px-2 py-2 text-sm transition-colors duration-200',
-              ]"
-              :to="route.path"
-              @click="close"
-            >
-              {{ route.name }}
-            </NuxtLink>
+              ]">
+              <span class="mr-4">
+                {{ route.icon }}
+              </span>
+              <span>
+                {{ route.name }}
+              </span>
+            </a>
           </MenuItem>
         </div>
       </MenuItems>
@@ -41,28 +42,69 @@ import { MenuItem, MenuItems, MenuButton, Menu } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { TransitionProps } from 'vue';
 
-const routeItems = [
-  {
-    path: '/',
-    name: 'Home',
-  },
-  {
-    path: '/create',
-    name: 'Create',
-  },
-  {
-    path: '/days',
-    name: 'Days',
-  },
-  {
-    path: '/players',
-    name: 'Players',
-  },
-  {
-    path: '/roles',
-    name: 'Roles',
-  },
-];
+const { push } = useRouter();
+
+const navigate = (path: string, closeFn: () => void) => {
+  closeFn();
+  push(path);
+};
+
+const gameStore = useGameStore();
+const { game } = storeToRefs(gameStore);
+
+
+const routeItems = computed(() => {
+  return [
+    {
+      path: '/',
+      name: 'Home',
+      icon: '🏠',
+      show: true,
+    },
+    {
+      path: '/create',
+      name: 'Create',
+      icon: '➕',
+      show: true,
+    },
+    {
+      path: '/days',
+      name: 'Days',
+      icon: '📅',
+      show: !!game.value.id,
+    },
+    {
+      path: '/players',
+      name: 'Players',
+      icon: '👥',
+      show: !!game.value.id,
+    },
+    {
+      path: '/roles',
+      name: 'Roles',
+      icon: '🎭',
+      show: !!game.value.id,
+    },
+    {
+      path: '/voting',
+      name: 'Voting',
+      icon: '🗳️',
+      show: !!game.value.id,
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      icon: '⚙️',
+      show: true,
+    },
+    {
+      path: '/about',
+      name: 'About',
+      icon: '❔',
+      show: true,
+    },
+  ].filter(route => route.show);
+});
 </script>
 <style lang="scss">
 .nav-item-text {
