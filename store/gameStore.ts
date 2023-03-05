@@ -1,6 +1,5 @@
 export const useGameStore = definePiniaStore('game', () => {
   const name = ref('')
-  const createdAt = ref(new Date())
   const endedAt = ref(new Date())
 
   const players = ref<Player[]>([])
@@ -39,17 +38,44 @@ export const useGameStore = definePiniaStore('game', () => {
     return game.players.filter(player => alivePlayerIds.value.includes(player.id))
   })
 
+  const getPlayerById = (id: UUID): Player => {
+    const emptyPlayer = {
+      id: '',
+      name: '',
+      color: '',
+    }
+    if (!game.players) {
+      return emptyPlayer
+    }
+    const player = game.players.find(player => player.id === id)
+    if (!player) {
+      return emptyPlayer
+    }
+    return player
+  }
+
   const createGame = () => {
+    if (!name.value) {
+      throw new Error('Game must have a name');
+    }
+    if (players.value.length !== roles.value.length) {
+      throw new Error('Players and roles must be the same length');
+    }
+
     const gameObj: Game = {
       id: newId(),
       name: name.value,
-      createdAt: createdAt.value,
+      createdAt: new Date(),
       endedAt: endedAt.value,
       players: [...players.value],
       roles: [...roles.value],
       days: days.value,
     }
+    players.value = [...players.value]
+    roles.value = [...roles.value]
     Object.assign(game, gameObj)
+
+    createFirstDay()
   }
 
   const startGame = () => {
@@ -112,7 +138,6 @@ export const useGameStore = definePiniaStore('game', () => {
   return {
     // Props to create a game
     name,
-    createdAt,
     endedAt,
     players,
     roles,
@@ -129,5 +154,7 @@ export const useGameStore = definePiniaStore('game', () => {
     endGame,
     createFirstDay,
     newDay,
+    // Helpers
+    getPlayerById
   }
 })

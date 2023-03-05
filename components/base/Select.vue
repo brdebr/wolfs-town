@@ -1,6 +1,6 @@
 <template>
   <Combobox v-model="selected" nullable :disabled="props.disabled">
-    <div class="relative mt-1 base-select">
+    <div class="relative base-select">
       <div
         class="base-select__input"
       >

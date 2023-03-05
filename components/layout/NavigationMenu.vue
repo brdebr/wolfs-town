@@ -19,7 +19,7 @@
       >
         <div v-for="route in routeItems" :key="route.path" class="px-1 py-1">
           <MenuItem v-slot="{ active, close }">
-            <a href="javascript:void(0)" @click="navigate(route.path, close)" :class="[
+            <a :href="route.path" @click.prevent="navigate(route.path, close)" :class="[
                 active ? 'nav-item-bg nav-item-text--active' : 'nav-item-text',
                 'flex w-full items-center rounded-md px-2 py-2 text-sm transition-colors duration-200',
               ]">

@@ -137,6 +137,8 @@
   @apply dark:bg-black dark:bg-opacity-20 dark:hover:bg-opacity-50;
 }
 .nav-button-text {
+  @apply transition-shadow duration-100;
+
   @apply text-white;
   @apply dark:text-gray-200;
 

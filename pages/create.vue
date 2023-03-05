@@ -7,13 +7,16 @@
       <div class="flex max-lg:flex-col end">
         <div class="flex flex-col gap-2 mb-4 flex-grow">
           <div class="text-sm">Name:</div>
-          <div>
+          <form @submit.prevent="createGame" class="flex gap-3">
             <BaseInput
               v-model="name"
               placeholder="Game name"
               title="Game name"
             />
-          </div>
+            <button class="create-game-button">
+              Create Game
+            </button>
+          </form>
         </div>
         <div class="flex flex-col gap-2 mb-4">
           <div class="text-sm">Date:</div>
@@ -23,6 +26,7 @@
         </div>
       </div>
       <div class="grid max-lg:grid-cols-1 grid-cols-2 gap-4">
+        <!-- PLAYERS -->
         <div class="players">
           <div class="players__header text-center font-bold mb-3">
             <span class="underline mr-3">
@@ -38,22 +42,33 @@
               v-for="player in players"
               :key="player.id"
             >
-              <BasePlayerInput :player="player" />
+              <BasePlayerInput show-color-picker :player="player" />
               <button
                 title="Remove player"
-                class="border border-red-300 hover:border-red-600 bg-white hover:bg-red-50 rounded p-1 group"
+                class="clean-button group"
                 @click="playersStore.removePlayer(player)"
               >
                 <XMarkIcon
-                  class="h-5 w-5 text-red-400 group-hover:text-red-600"
+                  class="h-5 w-5 text-red-400 group-hover:text-red-500"
                 />
               </button>
             </div>
-            <form @submit.prevent="addPlayer">
-              <BasePlayerInput :player="newPlayer" />
+            <form class="flex items-center gap-3" @submit.prevent="addPlayer">
+              <BasePlayerInput show-color-picker :player="newPlayer" />
+              <button
+                type="button"
+                title="Remove player"
+                class="clean-button group"
+                @click="newPlayer.name = ''"
+              >
+                <XMarkIcon
+                  class="h-5 w-5 text-red-400 group-hover:text-red-500"
+                />
+              </button>
             </form>
           </div>
         </div>
+        <!-- ROLES -->
         <div class="roles">
           <div class="roles">
             <div class="roles__header text-center font-bold mb-3">
@@ -66,7 +81,7 @@
             </div>
             <div class="roles__list flex flex-col gap-3">
               <div v-for="rol in roles" :key="rol.id"
-                class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4 mt-1 flex items-center"
+                class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4 flex items-center"
               >
                 <div class="flex-grow">
                   <span class="mr-4">
@@ -78,11 +93,11 @@
                 </div>
                 <div class="px-1 -mr-3 cursor-pointer group" @click="rolesStore.removeRole(rol)">
                   <XMarkIcon
-                    class="h-5 w-5 text-red-400 group-hover:text-red-600"
+                    class="h-5 w-5 text-red-400 group-hover:text-red-500"
                   />
                 </div>
               </div>
-              <form @submit.prevent="false">
+              <form v-if="(players.length > roles.length) || players.length === 0" @submit.prevent="false">
                 <BaseSelect
                   :items="possibleRoles"
                   :displayValueFn="displayFn"
@@ -115,15 +130,25 @@
 <script setup lang="ts">
 import XMarkIcon from '@heroicons/vue/24/outline/XMarkIcon';
 
+const router = useRouter();
+
 // Game
 const gameStore = useGameStore();
 const {
   name,
-  createdAt,
 } = storeToRefs(gameStore);
-const { isActive, pause } = useIntervalFn(() => {
+const createdAt = ref(new Date());
+const intervalUpdateCreatedAt = useIntervalFn(() => {
   createdAt.value = new Date();
 }, 1000);
+
+const createGame = () => {
+  gameStore.players = [...playersStore.players];
+  gameStore.roles = [...rolesStore.roles];
+  gameStore.createGame();
+  intervalUpdateCreatedAt.pause();
+  router.push('/days');
+};
 
 // Players
 const playersStore = usePlayersStore();
@@ -172,3 +197,19 @@ const addRole = (role: Role | null) => {
   clearRoleSelection()
 };
 </script>
+<style lang="scss">
+.clean-button {
+  @apply border rounded;
+  @apply bg-slate-200 dark:bg-slate-800;
+  @apply hover:bg-red-50 hover:dark:bg-red-900;
+  @apply border-red-800 hover:border-red-600;
+  @apply p-1;
+}
+.create-game-button {
+  @apply border rounded;
+  @apply bg-slate-200 dark:bg-slate-800;
+  @apply hover:bg-green-50 hover:dark:bg-green-900;
+  @apply border-green-800 hover:border-green-600;
+  @apply py-1 px-4;
+}
+</style>

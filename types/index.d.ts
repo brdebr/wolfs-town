@@ -53,6 +53,7 @@ declare global {
     createdAt: Date
     endedAt?: Date
     durationMs?: number
+    forMajor: boolean
     type: VotingType
     votes: Vote[]
     loser?: UUID

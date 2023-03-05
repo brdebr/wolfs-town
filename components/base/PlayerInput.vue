@@ -1,5 +1,5 @@
 <template>
-  <div class="player-input group/player mt-1 w-full flex gap-2" :style="styleBind">
+  <div class="player-input group/player w-full flex gap-2" :style="styleBind">
     <input
       v-model="player.name"
       title="Player name"
@@ -15,6 +15,7 @@
     <input
       v-model="player.color"
       title="Player color"
+      :disabled="!showColorPicker"
       class="
         base-input
         rounded-l-none
@@ -28,6 +29,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   player: Player;
+  showColorPicker?: boolean;
 }>();
 const emit = defineEmits<{
   (event: 'update:player', player: Player): void;

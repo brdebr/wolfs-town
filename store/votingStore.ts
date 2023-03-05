@@ -3,13 +3,14 @@ export const useVotingStore = definePiniaStore('voting', () => {
 
   const voting = ref<Voting | null>(null);
 
-  const createVoting = (type: VotingType) => {
+  const createVoting = (type: VotingType, forMajor: boolean) => {
     if (!gameStore.game.createdAt) {
       throw new Error('Game does not have a created date');
     }
     const votingObj: Voting = {
       id: newId(),
       createdAt: new Date(),
+      forMajor,
       type,
       votes: [],
     };

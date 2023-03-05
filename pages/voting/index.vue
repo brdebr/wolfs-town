@@ -1,7 +1,7 @@
 <template>
-  <PageCard page-title="Days">
+  <PageCard page-title="Voting">
     <template #header>
-      <div class="text-center">Days</div>
+      <div class="text-center">Voting</div>
     </template>
     <template #default>
       <div class="text-center">
