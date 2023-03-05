@@ -13,7 +13,7 @@
           v-for="player in players"
           :key="player.id"
         >
-          <BasePlayerInput :player="player" />
+          <BasePlayerInput readonly :player="player" />
         </div>
       </div>
     </template>

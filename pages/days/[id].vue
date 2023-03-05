@@ -19,7 +19,7 @@
       <div v-if="day" class="mt-3 flex flex-col gap-3">
         <div v-for="row in day.playerRows" :key="row.player" class="flex">
           <div class="">
-            <BasePlayerInput :player="gameStore.getPlayerById(row.player)" />
+            <BasePlayerInput readonly :player="gameStore.getPlayerById(row.player)" />
           </div>
           <div>
             

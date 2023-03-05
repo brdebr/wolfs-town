@@ -2,6 +2,7 @@
   <div class="player-input group/player w-full flex gap-2" :style="styleBind">
     <input
       v-model="player.name"
+      :disabled="readonly"
       title="Player name"
       class="
         base-input
@@ -29,6 +30,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   player: Player;
+  readonly?: boolean;
   showColorPicker?: boolean;
 }>();
 const emit = defineEmits<{
