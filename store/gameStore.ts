@@ -9,6 +9,36 @@ export const useGameStore = definePiniaStore('game', () => {
 
   const game = reactive<Partial<Game>>({})
 
+  const currentDay = computed(() => {
+    if (!game.days) {
+      return null
+    }
+    return game.days[game.days.length - 1]
+  })
+
+  const deadPlayerIds = computed(() => {
+    if (!game.days) {
+      return []
+    }
+    return game.days.map(day => {
+      return day.deaths.map(death => death.player)
+    }).flat()
+  })
+
+  const alivePlayerIds = computed(() => {
+    if (!game.players) {
+      return []
+    }
+    return game.players.map(player => player.id).filter(id => !deadPlayerIds.value.includes(id))
+  })
+
+  const alivePlayers = computed(() => {
+    if (!game.players) {
+      return []
+    }
+    return game.players.filter(player => alivePlayerIds.value.includes(player.id))
+  })
+
   const createGame = () => {
     const gameObj: Game = {
       id: newId(),
@@ -27,25 +57,27 @@ export const useGameStore = definePiniaStore('game', () => {
   }
 
   const endGame = () => {
-    if (!game.createdAt) return;
+    if (!game.createdAt) {
+      throw new Error('Game does not have a created date');
+    }
     game.endedAt = new Date()
     game.durationMs = game.endedAt.getTime() - game.createdAt.getTime()
   }
 
-  const firstDay = () => {
+  const createFirstDay = () => {
     const day: Day = {
+      id: newId(),
       number: 1,
-      major: 0,
-      villageKill: 0,
+      major: '',
+      villageKill: '',
       deaths: [],
-      rows: game.players?.map(player => {
-        return {
+      voting: [],
+      playerRows: (game.players || []).map(player => ({
           player: player.id,
           suspects: [],
           defends: [],
           roleGuesses: [],
-        }
-      }) || [],
+      })),
     };
     if (!game.days) {
       game.days = [];
@@ -53,15 +85,49 @@ export const useGameStore = definePiniaStore('game', () => {
     game.days.push(day)
   }
 
+  const newDay = () => {
+    if(!game.days) {
+      throw new Error('Game does not have any days');
+    };
+    if(!game.players) {
+      throw new Error('Game does not have any players');
+    }
+    const day: Day = {
+      id: newId(),
+      number: game.days.length + 1,
+      major: game.days[game.days.length].major,
+      villageKill: '',
+      deaths: [],
+      voting: [],
+      playerRows: game.players.map(player => ({
+        player: player.id,
+        suspects: [],
+        defends: [],
+        roleGuesses: [],
+      })
+    )};
+    game.days.push(day);
+  }
+
   return {
+    // Props to create a game
     name,
     createdAt,
     endedAt,
     players,
     roles,
+    // Computed props
+    deadPlayerIds,
+    alivePlayerIds,
+    alivePlayers,
+    currentDay,
+    // Game state
+    game,
+    // Actions
     createGame,
     startGame,
     endGame,
-    firstDay,
+    createFirstDay,
+    newDay,
   }
 })
