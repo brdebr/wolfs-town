@@ -33,4 +33,8 @@ export const usePlayersStore = definePiniaStore('players', () => {
     getExcludingRandomColor,
     sortPlayersByName,
   }
-})
+}, {
+  persist: {
+    storage: localStorage,
+  },
+});

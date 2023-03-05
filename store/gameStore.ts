@@ -157,4 +157,8 @@ export const useGameStore = definePiniaStore('game', () => {
     // Helpers
     getPlayerById
   }
-})
+}, {
+  persist: {
+    storage: localStorage,
+  },
+});

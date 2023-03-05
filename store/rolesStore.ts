@@ -30,5 +30,8 @@ export const useRolesStore = definePiniaStore('roles', () => {
     sortByAlignmentAndName,
   };
 
+}, {
+  persist: {
+    storage: localStorage,
+  },
 });
-

@@ -100,5 +100,8 @@ export const useVotingStore = definePiniaStore('voting', () => {
     votesCount,
     votingResult,
   };
+}, {
+  persist: {
+    storage: localStorage,
+  },
 });
-

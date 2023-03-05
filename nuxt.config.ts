@@ -29,6 +29,7 @@ export default defineNuxtConfig({
         ],
       },
     ],
+    '@pinia-plugin-persistedstate/nuxt',
   ],
   tailwindcss: {
     configPath: './tailwind.js'
