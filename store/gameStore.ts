@@ -4,7 +4,16 @@ export const useGameStore = definePiniaStore('game', () => {
 
   const players = ref<Player[]>([])
   const roles = ref<RoleItem[]>([])
-  const days = ref<Day[]>([])
+
+  const daysMap = computed(() => {
+    if (!game.days) {
+      return {}
+    }
+    return game.days.reduce((acc, day) => {
+      acc[day.id] = day
+      return acc
+    }, {} as Record<UUID, Day>)
+  })
 
   const game = reactive<Partial<Game>>({})
 
@@ -13,6 +22,13 @@ export const useGameStore = definePiniaStore('game', () => {
       return null
     }
     return game.days[game.days.length - 1]
+  })
+
+  const allVoting = computed(() => {
+    if (!game.days) {
+      return []
+    }
+    return game.days.map(day => day.voting).flat()
   })
 
   const deadPlayerIds = computed(() => {
@@ -54,6 +70,17 @@ export const useGameStore = definePiniaStore('game', () => {
     return player
   }
 
+  const getDayById = (id: UUID): Day => {
+    if (!game.days) {
+      throw new Error('Game does not have any days');
+    }
+    const day = game.days.find(day => day.id === id);
+    if (!day) {
+      throw new Error('Day not found');
+    }
+    return day;
+  };
+
   const createGame = () => {
     if (!name.value) {
       throw new Error('Game must have a name');
@@ -69,7 +96,7 @@ export const useGameStore = definePiniaStore('game', () => {
       endedAt: endedAt.value,
       players: [...players.value],
       roles: [...roles.value],
-      days: days.value,
+      days: [],
     }
     players.value = [...players.value]
     roles.value = [...roles.value]
@@ -146,8 +173,10 @@ export const useGameStore = definePiniaStore('game', () => {
     alivePlayerIds,
     alivePlayers,
     currentDay,
+    allVoting,
     // Game state
     game,
+    daysMap,
     // Actions
     createGame,
     startGame,
@@ -155,7 +184,8 @@ export const useGameStore = definePiniaStore('game', () => {
     createFirstDay,
     newDay,
     // Helpers
-    getPlayerById
+    getPlayerById,
+    getDayById,
   }
 }, {
   persist: {

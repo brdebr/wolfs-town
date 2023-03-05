@@ -6,16 +6,9 @@
     <template #default>
       <div class="text-center">
         <div v-for="day in game.days" :key="day.id">
-          <div>
-            Day [ {{ day.number }} ] - {{ day.playerRows.length }} players
-          </div>
-          <div>
-            <div v-for="row in day.playerRows" :key="row.player">
-              <div>
-                {{ gameStore.getPlayerById(row.player)?.name }}
-              </div>
-            </div>
-          </div>
+          <NuxtLink :to="`/days/${day.id}`">
+            Day [ {{ day.number }} ]
+          </NuxtLink>
         </div>
       </div>
     </template>

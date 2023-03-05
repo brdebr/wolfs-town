@@ -32,7 +32,7 @@ export const useVotingStore = definePiniaStore('voting', () => {
     }
     voting.value.endedAt = new Date();
     voting.value.durationMs = voting.value.endedAt.getTime() - voting.value.createdAt.getTime();
-    voting.value.loser = votingResult.value;
+    voting.value.result = votingResult.value;
 
     gameStore.currentDay.voting.push(voting.value);
 

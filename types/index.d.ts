@@ -56,7 +56,7 @@ declare global {
     forMajor: boolean
     type: VotingType
     votes: Vote[]
-    loser?: UUID
+    result?: UUID
   }
 
   export type Vote = {
