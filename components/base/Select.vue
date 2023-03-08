@@ -1,6 +1,6 @@
 <template>
   <Combobox v-model="selected" nullable :disabled="props.disabled">
-    <div class="relative base-select">
+    <div class="relative base-select focus-within:z-20">
       <div
         class="base-select__input"
       >
@@ -46,6 +46,7 @@
       <TransitionRoot
         v-bind="slideYTransitionCamelCase"
         @after-leave="clearQuery"
+        class="z-10"
       >
         <ComboboxOptions
           class="base-select__menu"

@@ -53,7 +53,7 @@
                 />
               </button>
             </div>
-            <form class="flex items-center gap-3" @submit.prevent="addPlayer">
+            <form v-if="!gameStore.game.days?.length" class="flex items-center gap-3" @submit.prevent="addPlayer">
               <BasePlayerInput show-color-picker :player="newPlayer" />
               <button
                 type="button"
