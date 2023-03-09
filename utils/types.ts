@@ -1,7 +1,10 @@
 export type Game = {
   id: number
   name: string
-  date: Date
+  createdAt: Date
+  startedAt?: Date
+  endedAt?: Date
+  durationMs?: number
   players: Player[]
   roles: Role[]
   days: Day[]

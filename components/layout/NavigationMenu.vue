@@ -51,6 +51,10 @@ const routeItems = [
     name: 'Create',
   },
   {
+    path: '/days',
+    name: 'Days',
+  },
+  {
     path: '/players',
     name: 'Players',
   },

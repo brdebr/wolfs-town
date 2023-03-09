@@ -5,7 +5,7 @@
     </template>
     <template #default>
       <div class="flex max-lg:flex-col end">
-        <div class="flex flex-col gap-1 mb-4 flex-grow">
+        <div class="flex flex-col gap-2 mb-4 flex-grow">
           <div class="text-sm">Name:</div>
           <div>
             <BaseInput
@@ -15,9 +15,9 @@
             />
           </div>
         </div>
-        <div class="flex flex-col gap-1 mb-4">
+        <div class="flex flex-col gap-2 mb-4">
           <div class="text-sm">Date:</div>
-          <div class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4">
+          <div class="text-sm input-bg input-text ring-1 hover:ring-2 transition-shadow input-ring rounded py-2 px-4">
             {{ createdAt?.toISOString()?.replace('T', ' ').replace('Z', '').slice(0, 19) }}
           </div>
         </div>
@@ -65,13 +65,22 @@
               </span>
             </div>
             <div class="roles__list flex flex-col gap-3">
-              <div v-for="rol in roles" :key="rol.id" class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4 mt-1">
-                <span class="mr-4">
-                  {{ rol.emoji }}
-                </span>
-                <span>
-                  {{ rol.displayName }}
-                </span>
+              <div v-for="rol in roles" :key="rol.id"
+                class="text-sm input-bg input-text ring-1 input-ring rounded py-2 px-4 mt-1 flex items-center"
+              >
+                <div class="flex-grow">
+                  <span class="mr-4">
+                    {{ rol.emoji }}
+                  </span>
+                  <span>
+                    {{ rol.displayName }}
+                  </span>
+                </div>
+                <div class="px-1 -mr-3 cursor-pointer group" @click="rolesStore.removeRole(rol)">
+                  <XMarkIcon
+                    class="h-5 w-5 text-red-400 group-hover:text-red-600"
+                  />
+                </div>
               </div>
               <form @submit.prevent="false">
                 <BaseSelect
@@ -112,11 +121,8 @@ const gameStore = useGameStore();
 const {
   name,
   createdAt,
-  endedAt,
-  players: gamePlayers,
-  roles: gameRoles,
 } = storeToRefs(gameStore);
-useIntervalFn(() => {
+const { isActive, pause } = useIntervalFn(() => {
   createdAt.value = new Date();
 }, 1000);
 
@@ -130,8 +136,6 @@ const newPlayer = ref<Player>({
 });
 
 const addPlayer = () => {
-  console.log('addPlayer');
-  
   playersStore.addPlayer(newPlayer.value);
   playersStore.sortPlayersByName();
   newPlayer.value = {

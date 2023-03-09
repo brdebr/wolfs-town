@@ -1,5 +1,5 @@
 <template>
-  <Combobox v-model="selected" nullable>
+  <Combobox v-model="selected" nullable :disabled="props.disabled">
     <div class="relative mt-1 base-select">
       <div
         class="base-select__input"
@@ -112,6 +112,7 @@ const props = defineProps<{
   keyProp: string,
   modelValue: Role | null,
   query: string,
+  disabled?: boolean,
   excludeSearchKeys?: string[],
 }>();
 
