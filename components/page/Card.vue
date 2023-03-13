@@ -34,6 +34,7 @@ const props = defineProps<{
   @apply dark:border-red-300;
 }
 .page-bg {
+  @apply transition-colors duration-1000;
   @apply bg-rose-50/30;
   @apply dark:bg-[#022833];
 }

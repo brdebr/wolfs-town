@@ -56,6 +56,7 @@ export const useVotingStore = definePiniaStore('voting', () => {
       return {};
     }
     return voting.value.votes.reduce((acc, vote) => {
+      acc[vote.target] = acc[vote.target] || 0;
       if (acc[vote.target]) {
         acc[vote.target] += 1;
       } else {

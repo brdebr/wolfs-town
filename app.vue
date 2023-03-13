@@ -18,6 +18,7 @@ html, body, #__nuxt, .app-root {
 }
 
 .back-color {
+  @apply transition-colors duration-1000;
   @apply bg-sky-50;
   @apply dark:bg-rose-900;
 }
